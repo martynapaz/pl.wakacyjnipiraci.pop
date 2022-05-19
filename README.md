@@ -3,6 +3,10 @@
 Adres strony internetowej testowanego projektu: https://www.wakacyjnipiraci.pl
 
 
+
+
+[X] Zastosowanie Data Driven Testing
+
 [X] Zastosowanie wzorca Page Object 
 
 [X] Zastosowanie podejścia Page Factory
@@ -16,8 +20,10 @@ Adres strony internetowej testowanego projektu: https://www.wakacyjnipiraci.pl
 ## 1. Opis projektu
 
 Celem projektu jest przetestowanie formularza do 
-rejestracji i logowania użytkowników na stronie (nazwa strony). W 
-tym celu opracowano 3 przypadki testowe:
+rejestracji i logowania użytkowników, podgląd zakładki "Ulubione" oraz wyszukiwanie frazy w wyszukiwawrce na stronie [(Wakacyjni Piraci)](https://www.wakacyjnipiraci.pl). 
+
+
+W tym celu opracowano 5 przypadków testowych:
 
 - TC1: Poprawne logowanie użytkownika dla podanych danych 
 
