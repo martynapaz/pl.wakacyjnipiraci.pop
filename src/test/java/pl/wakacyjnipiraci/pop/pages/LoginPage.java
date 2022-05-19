@@ -43,7 +43,7 @@ public class LoginPage {
     }
 
     /**
-     * Metoda zawraca text Alertu o niepoprawnym formacie email
+     * Metoda zwraca text Alertu o niepoprawnym formacie email
      * @return
      */
 
@@ -58,11 +58,14 @@ public class LoginPage {
     public LoginPage logOutUser()
     {
         if(logOutUserLink.isDisplayed()){
+            System.out.println("0");
             logOutUserLink.click();
         }else
         {
+            System.out.println("1");
             userAccountImg.click();
             new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(logOutUserLink));
+            System.out.println("2");
             logOutUserLink.click();
         }
         return new LoginPage(driver);

@@ -15,6 +15,13 @@ public class StartPage {
     private WebElement cookieButton;
     @FindBy (xpath = "//body/div[@id='hp-app']/div[2]/div[1]/div[3]/div[1]/div[1]/img[1]")
     private WebElement accountImg;
+    @FindBy (xpath = "//body/div[@id='hp-app']/div[2]/div[1]/div[3]/a[1]/span[1]")
+    private WebElement favoriteHeartBar;
+    @FindBy (id = "searchInput")
+    private WebElement searchInput;
+    @FindBy (xpath = "//body/div[@id='hp-app']/div[3]/div[1]/button[1]")
+    private WebElement inputButtonSubmit;
+
 
     public StartPage(WebDriver driver){
         this.driver = driver;
@@ -42,5 +49,22 @@ public class StartPage {
         new WebDriverWait(driver, Duration.ofSeconds(7)).until(ExpectedConditions.elementToBeClickable(accountImg));
         accountImg.click();
         return new AccountPage(driver);
+    }
+
+    /**
+     * Kliknięcie i przejście do strony z ulubionymi ofertami, artykulami
+     */
+    public FavoritePage clickGoToLikePage(){
+        favoriteHeartBar.click();
+        return new FavoritePage(driver);
+    }
+
+    /**
+     * wpisywanie zadanej frazy w wyszukiwarce
+     */
+    public ResultPage inputSearch(String textPhrase){
+            searchInput.sendKeys(textPhrase);
+            inputButtonSubmit.click();
+        return new ResultPage(driver);
     }
 }

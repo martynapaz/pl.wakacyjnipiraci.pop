@@ -18,6 +18,8 @@ public class MainTest {
     public LoginPage loginPage;
     public SignUpPage signUpPage;
     public DashboardPage dashboardPage;
+    public FavoritePage favoritePage;
+    public ResultPage resultPage;
 
     @BeforeClass
     public void setUp(){
@@ -38,6 +40,7 @@ public class MainTest {
         startPage.checkAndCloseCookieConsent();
         startPage.clickAccount();
         dashboardPage = new LoginPage(driver).fillValidLoginForm("martyna.jankowicz@gmail.com","Tester2022!");
+
         Assert.assertEquals(dashboardPage.getUserNameText(),expectedTextLoggedUser);
         new LoginPage(driver).logOutUser();
     }
@@ -56,6 +59,7 @@ public class MainTest {
         startPage.clickAccount();
         loginPage = new AccountPage(driver).clickLogin();
         dashboardPage = loginPage.fillValidLoginForm("martyna.jankowiczgmail.com","Tester2022!");
+
         Assert.assertEquals(loginPage.getAlertInvalidLoginEmail(),alertExpectedText);
     }
 
@@ -71,8 +75,43 @@ public class MainTest {
         startPage.clickAccount();
         signUpPage = new AccountPage(driver).clickSignUp();
         dashboardPage = signUpPage.fillValidSignUpForm("martyna.jankowicz@gmail.com","Tester2022!");
+
         Assert.assertEquals(signUpPage.getAlertExistingEmail(),alertExpectedText);
     }
+
+    /**
+     * TC4: Przejście do zakladki "Ulubione" na niezalogowanym użytkowniku
+     */
+    @Test(description = "Przejście do zakladki \"Ulubione\" na niezalogowanym użytkowniku")
+    public void goToUnloggedUserFavorite(){
+        String expectedText = "Zaloguj się, by zachować to, co cię inspiruje";
+        String expectedTextAddition = "Moźesz dodać do 99 pozycji";
+
+        startPage = new StartPage(driver).openPage();
+        startPage.checkAndCloseCookieConsent();
+        startPage.clickGoToLikePage();
+        favoritePage = new FavoritePage(driver);
+
+        Assert.assertEquals(favoritePage.getEmptyUnloggedLikesText(),expectedText);
+        Assert.assertEquals(favoritePage.getEmptyUnloggedLikesTextAddition(),expectedTextAddition);
+    }
+
+    /**
+     * TC5: Wpisanie zadanej frazy "Wyspy Kanaryjskie" w wyszukiwarkę
+     */
+    @Test(description = "Wpisanie zadanej frazy \"Wyspy Kanaryjskie\" w wyszukiwarkę")
+    public void searchPhraseUsingInputSearchBar(){
+        String phraseToSearch = "Wyspy Kanaryjskie";
+        String expectedCounterResultText = "Ilość wyników: 8";
+
+        startPage = new StartPage(driver).openPage();
+        startPage.checkAndCloseCookieConsent();
+        startPage.inputSearch(phraseToSearch);
+        resultPage = new ResultPage(driver);
+
+        Assert.assertEquals(resultPage.getResultCounterText(),expectedCounterResultText);
+    }
+
 
 
     @AfterClass

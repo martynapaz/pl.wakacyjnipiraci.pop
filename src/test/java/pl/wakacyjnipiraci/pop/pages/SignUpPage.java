@@ -36,7 +36,7 @@ public class SignUpPage {
     }
 
     /**
-     * Metoda zawraca text Alertu o istniejacym juz mejlu
+     * Metoda zwraca text Alertu o istniejacym juz mejlu
      * @return
      */
     public String getAlertExistingEmail(){
