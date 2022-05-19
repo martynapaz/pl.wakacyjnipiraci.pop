@@ -63,8 +63,8 @@ public class StartPage {
      * wpisywanie zadanej frazy w wyszukiwarce
      */
     public ResultPage inputSearch(String textPhrase){
-            searchInput.sendKeys(textPhrase);
-            inputButtonSubmit.click();
+        searchInput.sendKeys(textPhrase);
+        inputButtonSubmit.click();
         return new ResultPage(driver);
     }
 }

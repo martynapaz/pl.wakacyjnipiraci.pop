@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pl.wakacyjnipiraci.pop.ddt.ReadExcel;
 import pl.wakacyjnipiraci.pop.pages.*;
 import org.openqa.selenium.WebDriver;
 
@@ -14,7 +15,6 @@ import java.time.Duration;
 public class MainTest {
     public WebDriver driver;
     public StartPage startPage;
-    public AccountPage accountPage;
     public LoginPage loginPage;
     public SignUpPage signUpPage;
     public DashboardPage dashboardPage;
@@ -33,13 +33,16 @@ public class MainTest {
      * TC1: Poprawne logowanie użytkownika dla podanych danych
      */
     @Test(description = "Poprawne logowanie użytkownika")
-        public void loginValidTest(){
+    public void loginValidTest(){
         String expectedTextLoggedUser = "Witaj!, martyna.jankowicz";
+        ReadExcel data = new ReadExcel();
+        String emailValidUser = data.getData("ValidData",1,0);
+        String passValidUser = data.getData("ValidData",1,1);
 
         startPage = new StartPage(driver).openPage();
         startPage.checkAndCloseCookieConsent();
         startPage.clickAccount();
-        dashboardPage = new LoginPage(driver).fillValidLoginForm("martyna.jankowicz@gmail.com","Tester2022!");
+        dashboardPage = new LoginPage(driver).fillValidLoginForm(emailValidUser,passValidUser);
 
         Assert.assertEquals(dashboardPage.getUserNameText(),expectedTextLoggedUser);
         new LoginPage(driver).logOutUser();
@@ -53,12 +56,16 @@ public class MainTest {
             "poprawności walidacji formularza do logowania")
     public void loginInvalidEmailTest(){
         String alertExpectedText = "E-mail ma niepoprawny format";
+        ReadExcel data = new ReadExcel();
+        String emailInvalidUser = data.getData("InvalidData",1,0);
+        String passInvalidUser = data.getData("InvalidData",1,1);
 
         startPage = new StartPage(driver).openPage();
         startPage.checkAndCloseCookieConsent();
         startPage.clickAccount();
         loginPage = new AccountPage(driver).clickLogin();
-        dashboardPage = loginPage.fillValidLoginForm("martyna.jankowiczgmail.com","Tester2022!");
+
+        dashboardPage = loginPage.fillValidLoginForm(emailInvalidUser,passInvalidUser);
 
         Assert.assertEquals(loginPage.getAlertInvalidLoginEmail(),alertExpectedText);
     }
@@ -69,12 +76,15 @@ public class MainTest {
     @Test(description = "Próba rejestracji już istniejącego użytkownika")
     public void signupExistingUserTest(){
         String alertExpectedText = "E-mail jest już w użyciu";
+        ReadExcel data = new ReadExcel();
+        String emailValidUser = data.getData("ValidData",1,0);
+        String passValidUser = data.getData("ValidData",1,1);
 
         startPage = new StartPage(driver).openPage();
         startPage.checkAndCloseCookieConsent();
         startPage.clickAccount();
         signUpPage = new AccountPage(driver).clickSignUp();
-        dashboardPage = signUpPage.fillValidSignUpForm("martyna.jankowicz@gmail.com","Tester2022!");
+        dashboardPage = signUpPage.fillValidSignUpForm(emailValidUser,passValidUser);
 
         Assert.assertEquals(signUpPage.getAlertExistingEmail(),alertExpectedText);
     }
@@ -111,8 +121,6 @@ public class MainTest {
 
         Assert.assertEquals(resultPage.getResultCounterText(),expectedCounterResultText);
     }
-
-
 
     @AfterClass
     public void tearDown(){
