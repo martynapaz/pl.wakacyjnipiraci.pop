@@ -25,3 +25,7 @@ tym celu opracowano 3 przypadki testowe:
 poprawności walidacji formularza do logowania
 
 - TC3: Próba rejestracji już istniejącego użytkownika
+
+- TC4: Przejście do zakladki "Ulubione" na niezalogowanym użytkowniku
+
+- TC5: Wpisanie zadanej frazy "Wyspy Kanaryjskie" w wyszukiwarkę
