@@ -5,11 +5,11 @@ Adres strony internetowej testowanego projektu: https://www.wakacyjnipiraci.pl
 
 
 
-[X] Zastosowanie Data Driven Testing
+- [X] Zastosowanie Data Driven Testing
 
-[X] Zastosowanie wzorca Page Object 
+- [X] Zastosowanie wzorca Page Object 
 
-[X] Zastosowanie podejścia Page Factory
+- [X] Zastosowanie podejścia Page Factory
 
 
 
