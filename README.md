@@ -25,13 +25,13 @@ rejestracji i logowania użytkowników, podgląd zakładki "Ulubione" oraz wyszu
 
 W tym celu opracowano 5 przypadków testowych:
 
-- TC1: Poprawne logowanie użytkownika dla podanych danych 
-
-- TC2: Niepoprawna logowanie użytkownika w celu sprawdzenia 
+- TC1: Niepoprawna logowanie użytkownika w celu sprawdzenia 
 poprawności walidacji formularza do logowania
 
-- TC3: Próba rejestracji już istniejącego użytkownika
+- TC2: Próba rejestracji już istniejącego użytkownika
 
-- TC4: Przejście do zakladki "Ulubione" na niezalogowanym użytkowniku
+- TC3: Przejście do zakladki "Ulubione" na niezalogowanym użytkowniku
 
-- TC5: Wpisanie zadanej frazy "Wyspy Kanaryjskie" w wyszukiwarkę
+- TC4: Wpisanie zadanej frazy "Wyspy Kanaryjskie" w wyszukiwarkę
+
+- TC5: Poprawne logowanie użytkownika dla podanych danych
