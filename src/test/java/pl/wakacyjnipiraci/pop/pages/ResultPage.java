@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ResultPage {
     private WebDriver driver;
-    @FindBy (xpath = "//div[contains(text(),'Ilość wyników: ')]")
+    @FindBy (xpath = "//div[contains(text(),'Ilość wyników: 8')]")
     private WebElement resultCounterText;
 
     public ResultPage(WebDriver driver) {

@@ -16,7 +16,7 @@ public class DashboardPage {
     private WebDriver driver;
     @FindBy(xpath = "//body/div[@id='hp-app']/div[2]/div[1]/div[3]/div[1]/div[1]/img[1]")
     private WebElement userAccountImg;
-    @FindBy (xpath = "//div[contains(text(),'Witaj!,')]")
+    @FindBy (xpath = "//div[contains(text(),'Witaj!, martyna.jankowicz')]")
     private WebElement userNameLogged;
     @FindBy (xpath = "//body/div[@id='hp-app']/div[2]/div[1]/div[3]/a[1]/span[1]")
     private WebElement favoriteHeartBar;
@@ -33,6 +33,7 @@ public class DashboardPage {
      */
     public String getUserNameText(){
         userAccountImg.click();
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(userNameLogged));
         return userNameLogged.getText();
     }
 

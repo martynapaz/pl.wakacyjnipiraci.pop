@@ -29,31 +29,14 @@ public class MainTest {
         driver.manage().window().maximize();
     }
 
-    /**
-     * TC1: Poprawne logowanie użytkownika dla podanych danych
-     */
-    @Test(description = "Poprawne logowanie użytkownika")
-    public void loginValidTest(){
-        String expectedTextLoggedUser = "Witaj!, martyna.jankowicz";
-        ReadExcel data = new ReadExcel();
-        String emailValidUser = data.getData("ValidData",1,0);
-        String passValidUser = data.getData("ValidData",1,1);
 
-        startPage = new StartPage(driver).openPage();
-        startPage.checkAndCloseCookieConsent();
-        startPage.clickAccount();
-        dashboardPage = new LoginPage(driver).fillValidLoginForm(emailValidUser,passValidUser);
-
-        Assert.assertEquals(dashboardPage.getUserNameText(),expectedTextLoggedUser);
-        new LoginPage(driver).logOutUser();
-    }
 
     /**
-     * TC2: Niepoprawna logowanie użytkownika w celu sprawdzenia
+     * TC1: Niepoprawna logowanie użytkownika w celu sprawdzenia
      * poprawności walidacji formularza do logowania
      */
     @Test(description = "Niepoprawne logowanie użytkownika w celu sprawdzenia \n" +
-            "poprawności walidacji formularza do logowania")
+            "poprawności walidacji formularza do logowania", priority = 0)
     public void loginInvalidEmailTest(){
         String alertExpectedText = "E-mail ma niepoprawny format";
         ReadExcel data = new ReadExcel();
@@ -71,9 +54,9 @@ public class MainTest {
     }
 
     /**
-     * TC3: Próba rejestracji już istniejącego użytkownika
+     * TC2: Próba rejestracji już istniejącego użytkownika
      */
-    @Test(description = "Próba rejestracji już istniejącego użytkownika")
+    @Test(description = "Próba rejestracji już istniejącego użytkownika", priority = 1)
     public void signupExistingUserTest(){
         String alertExpectedText = "E-mail jest już w użyciu";
         ReadExcel data = new ReadExcel();
@@ -90,9 +73,9 @@ public class MainTest {
     }
 
     /**
-     * TC4: Przejście do zakladki "Ulubione" na niezalogowanym użytkowniku
+     * TC3: Przejście do zakladki "Ulubione" na niezalogowanym użytkowniku
      */
-    @Test(description = "Przejście do zakladki \"Ulubione\" na niezalogowanym użytkowniku")
+    @Test(description = "Przejście do zakladki \"Ulubione\" na niezalogowanym użytkowniku", priority = 2)
     public void goToUnloggedUserFavorite(){
         String expectedText = "Zaloguj się, by zachować to, co cię inspiruje";
         String expectedTextAddition = "Moźesz dodać do 99 pozycji";
@@ -107,9 +90,9 @@ public class MainTest {
     }
 
     /**
-     * TC5: Wpisanie zadanej frazy "Wyspy Kanaryjskie" w wyszukiwarkę
+     * TC4: Wpisanie zadanej frazy "Wyspy Kanaryjskie" w wyszukiwarkę
      */
-    @Test(description = "Wpisanie zadanej frazy \"Wyspy Kanaryjskie\" w wyszukiwarkę")
+    @Test(description = "Wpisanie zadanej frazy \"Wyspy Kanaryjskie\" w wyszukiwarkę", priority = 3)
     public void searchPhraseUsingInputSearchBar(){
         String phraseToSearch = "Wyspy Kanaryjskie";
         String expectedCounterResultText = "Ilość wyników: 8";
@@ -120,6 +103,25 @@ public class MainTest {
         resultPage = new ResultPage(driver);
 
         Assert.assertEquals(resultPage.getResultCounterText(),expectedCounterResultText);
+    }
+
+    /**
+     * TC5: Poprawne logowanie użytkownika dla podanych danych
+     */
+    @Test(description = "Poprawne logowanie użytkownika", priority = 4)
+    public void loginValidTest(){
+        String expectedTextLoggedUser = "Witaj!, martyna.jankowicz";
+        ReadExcel data = new ReadExcel();
+        String emailValidUser = data.getData("ValidData",1,0);
+        String passValidUser = data.getData("ValidData",1,1);
+
+        startPage = new StartPage(driver).openPage();
+        startPage.checkAndCloseCookieConsent();
+        startPage.clickAccount();
+        dashboardPage = new LoginPage(driver).fillValidLoginForm(emailValidUser,passValidUser);
+
+        Assert.assertEquals(dashboardPage.getUserNameText(),expectedTextLoggedUser);
+        new LoginPage(driver).logOutUser();
     }
 
     @AfterClass
